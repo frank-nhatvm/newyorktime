@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:newyorktimes/base/entity.dart';
 import 'package:newyorktimes/common/Configs.dart';
 
 enum HTTP_METHOD { GET, POST, PUT, DELETE, HEAD, PATH }
@@ -72,7 +71,7 @@ class BaseNetworkService {
 
     String path = processPaths();
     String parametersString = processParameters();
-    url = '${Config.BASE_URL}/$basePath/$path?$parametersString';
+    url = '${Config.BASE_URL}/$basePath?$parametersString';
   }
 
   String processPaths() {

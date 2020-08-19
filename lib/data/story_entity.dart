@@ -1,14 +1,14 @@
 import 'package:newyorktimes/base/entity.dart';
-
-
-class StoryEntity extends Entity {
+import 'package:json_annotation/json_annotation.dart';
+part 'story_entity.g.dart';
+@JsonSerializable(nullable: false, explicitToJson: true)
+class StoryEntity {
   String abstract;
   String title;
   String byline;
 
-  @override
-  void parseJson(Map<String, dynamic> json) {
-    this.abstract = json['abstract'];
-    this.title = json['title'];
-  }
+  StoryEntity(this.abstract, this.title, this.byline);
+  factory StoryEntity.fromJson(Map<String, dynamic> json) => _$StoryEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$StoryEntityToJson(this);
 }
