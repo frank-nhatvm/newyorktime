@@ -3,6 +3,8 @@ import 'package:newyorktimes/base/base_view.dart';
 import 'package:newyorktimes/base/view_state.dart';
 import 'package:newyorktimes/screens/home/home_model.dart';
 
+import '../../data/story_entity.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -27,12 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
         );
 
       case ViewState.Retrieved:
+        List<StoryEntity> stories = model.homeEntity.results;
         return Container(
-          child: model.listStories.length > 0
-              ? Expanded(
-                  child: ListView.builder(
+          child: stories.length > 0
+              ? ListView.builder(
+                    itemCount: stories.length,
                       itemBuilder: (BuildContext context, int index) {
-                    final story = model.listStories[index];
+                    final story = stories[index];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -41,8 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(story.abstract),
                       ],
                     );
-                  }),
-                )
+                  })
               : Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('There is no stories'),
